@@ -1,4 +1,2 @@
-pymongo
-python-dotenv
 faker
 requests
