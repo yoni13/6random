@@ -54,4 +54,4 @@ while True:
     	file.close()
     	passwd += 1
     	print(spasswd)
-    	time.sleep(0.03)
+    	time.sleep(0.0000003)
