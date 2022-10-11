@@ -1,2 +1,3 @@
 faker
 requests
+fake-useragent
