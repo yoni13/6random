@@ -15,4 +15,9 @@ t2.start()
 print('run')
 
 while True:
+    try:
+        if int(open('failed.txt','r').readlines()) > int(open('failedf.txt','r').readlines()):
+            os._exit(0)
+    except:
+        pass
     time.sleep(1)
