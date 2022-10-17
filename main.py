@@ -4,9 +4,9 @@ from threading import Thread
 
 from init import startrun
 
-target = '余佩倫'
+target = '張俊清'
 
-t1 = Thread(target=startrun, args=(201841,target,True))
+t1 = Thread(target=startrun, args=(0,target,True))
 t1.daemon = True
 t1.start()
 t2 = Thread(target=startrun, args=(999999,target,False))
