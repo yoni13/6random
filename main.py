@@ -16,7 +16,9 @@ print('run')
 
 while True:
     try:
-        if int(open('failed.txt','r').readlines()) > int(open('failedf.txt','r').readlines()):
+        if 'Fucked the password' in str(open('log.txt', 'r').read()):
+            os._exit(0)
+        if int(open('failed.txt','r').read()) > int(open('failedf.txt','r').read()):
             os._exit(0)
     except:
         pass

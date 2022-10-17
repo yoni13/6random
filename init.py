@@ -49,7 +49,7 @@ def startrun(passwd,username,start):
             twt=dt2.strftime("%Y-%m-%d %H:%M:%S")
             #we fuck out the real passwd
             file = open('passwd.txt','a+')
-            file.write(str(spasswd)+'\n')
+            file.write(str(spasswd))
             file.close()
             print('\n passwd is ' +spasswd)
             file = open('log.txt','a')
@@ -66,7 +66,7 @@ def startrun(passwd,username,start):
                 file = open('failed.txt','w')
             if start == False:
                 file = open('failedf.txt','w')
-            file.write(str(spasswd)+'\n')
+            file.write(str(spasswd))
             file.close()
             if start == True:
                 passwd += 1
