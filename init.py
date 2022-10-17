@@ -72,7 +72,7 @@ def startrun(passwd,username,start):
                 passwd += 1
             else:
                 print("\r Running in two thread...."+spasswd+",Time:"+twt,end = "")
-            passwd -= 1
+                passwd -= 1
 
             file = open('log.txt','a')
             file.write('['+str(start)+','+twt+']Failed, tried ' + spasswd +'\n')
