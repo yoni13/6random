@@ -4,7 +4,7 @@ from threading import Thread
 
 from init import startrun
 
-target = '張俊清'
+target = '要打的'
 
 t1 = Thread(target=startrun, args=(0,target,True))
 t1.daemon = True
